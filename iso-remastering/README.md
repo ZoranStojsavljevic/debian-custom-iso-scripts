@@ -15,4 +15,4 @@ iso_remastering.sh generic script, which modifies a Debian Live-Cd successfully,
 
 This is just an outline of the procedure and it was tested on a Debian 9.4.0 Live (Gnome) Stretch image.
 
-The script is kept in local space... It works for different hosts then Debian, it was tested on Fedora 27 (kernel 4.15.16-300.fc27.x86_64), albeit, the Debian root tree, unsquashed, works like a charm, all the apt upgrade and other commands (deleting libreoffice and similar) work seamlessly using undernine Fedora 27 4.15.16-300.fc27.x86_64 kernel.
+The script is kept in local space... It works for different hosts then Debian, it was tested on Fedora 27 (kernel 4.15.16-300.fc27.x86_64), albeit, the Debian root tree, unsquashed, works like a charm, all the apt upgrade and other commands (deleting libreoffice and similar) work seamlessly using underline Fedora 27 4.15.16-300.fc27.x86_64 kernel.
