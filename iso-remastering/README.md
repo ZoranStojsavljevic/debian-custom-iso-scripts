@@ -16,20 +16,16 @@ iso_remastering.sh generic script, which modifies a Debian Live-Cd successfully,
 This is just an outline of the procedure and it was tested on a Debian 9.4.0 Live (Gnome) Stretch image.
 
 The script is kept in local space... It works for different hosts then Debian, it was tested on Fedora 27 (kernel 4.15.16-300.fc27.x86_64), albeit, the Debian root tree, unsquashed, works like a charm, all the apt upgrade and other commands (deleting libreoffice and similar) work seamlessly using underline Fedora 27 4.15.16-300.fc27.x86_64 kernel.
-_______
 
-Regarding the last command of the script:
-
-To make .config file, the following command is required:
+Regarding the last command of the iso-remastering.sh script:
 
     sudo xorriso -as mkisofs -R -r -J -joliet-long -partition_offset 16 -A "Debian Gnome Live (DT)" -publisher "_nobody_" -V "Debian 9.4.0 Stretch" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o debian-live-9.4.0-amd64-gnome.iso tmp_dir
 
 It appeared that this line creates debian-live-9.4.0-amd64-gnome.iso, but bootable ONLY as legacy boot (using GRUB 1.99, and the isolinux/menu.cfg).
-_______
 
-I am able to change/re-shuffle order in the execution of GRUB options (and put first in the order which is Debian Installer), and I am able to throw-in the timer (let say, for 5 seconds), after which the leading option - Debian Installer will boot automatically.
+It is possible to change/re-shuffle order in the execution of GRUB options (and put first in the order which is Debian Installer), and it is possible to throw-in the timer (let say, for 5 seconds), after which the leading option - Debian Installer will boot automatically.
 
-Here is how I shuffled menu cfg, and how first few lines of it look:
+Here the shuffled menu.cfg is shown, and the first few lines of it:
 
     INCLUDE stdmenu.cfg
     MENU title Main Menu
@@ -45,4 +41,4 @@ Here is how I shuffled menu cfg, and how first few lines of it look:
     linux /live/vmlinuz-4.9.0-6-amd64
     APPEND initrd=/live/initrd.img-4.9.0-6-amd64 boot=live components_
 
-Actually, to be precise, GRUB 1.99 boots isolinux.cfg file rather then menu.cfg (menu.cfg is just a part of the isolinux.cfg boot menu)!
+Actually, to be precise, GRUB 1.99 boots isolinux.cfg file rather then menu.cfg (menu.cfg is just a part of the isolinux.cfg boot menu sequence)!
