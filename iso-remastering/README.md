@@ -41,4 +41,8 @@ Here the shuffled menu.cfg is shown, and the first few lines of it:
     linux /live/vmlinuz-4.9.0-6-amd64
     APPEND initrd=/live/initrd.img-4.9.0-6-amd64 boot=live components_
 
-Actually, to be precise, GRUB 1.99 boots isolinux.cfg file rather then menu.cfg (menu.cfg is just a part of the isolinux.cfg boot menu sequence)!
+Actually, to be precise, GRUB 1.99 boots isolinux/isolinux.cfg file rather then isolinux/menu.cfg (menu.cfg is just a part of the isolinux.cfg boot menu sequence)!
+
+There is an UEFI implementation, which is recently added as logical layer to Virtual Box. In such a case, with this implementation, the additional /boot/efi as mounting point /dev/sdX should be created on the bootable media. In such a case, the host Debian .iso implementation provides drirectory boot/grub/grub.cfg where the GRUB 2.02 config file grub.cfg resides.
+
+Still, the preseed configuration does NOT boot with UEFI implementation (TO DO this task in the near future).
