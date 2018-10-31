@@ -25,3 +25,5 @@ echo "nameserver IP_addr2" >> /etc/resolv.conf
 apt update
 apt upgrade
 apt-get install rt-tools
+
+## With exit command back to original RAM disk rootfs
