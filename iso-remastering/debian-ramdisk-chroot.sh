@@ -21,8 +21,7 @@ mount -t sysfs /sys /sys
 echo "nameserver IP_addr1" > /etc/resolv.conf
 echo "nameserver IP_addr2" >> /etc/resolv.conf
 
+## Execute what is needed after
 apt update
 apt upgrade
 apt-get install rt-tools
-
-## Execute what is needed after
