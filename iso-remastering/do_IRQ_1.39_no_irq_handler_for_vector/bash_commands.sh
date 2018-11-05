@@ -15,3 +15,9 @@ systemctl start getty@tty7
 
 ## Command to stop Graphical Desktop Manager (GDM)
 systemctl stop getty@tty7
+
+## Serial port blocking command on receive:
+cat < /dev/ttyS0
+
+## Serial port unblocking command for sending
+echo "test" > /dev/ttyS0
