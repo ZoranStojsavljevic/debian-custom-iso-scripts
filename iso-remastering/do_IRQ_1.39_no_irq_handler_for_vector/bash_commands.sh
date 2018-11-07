@@ -21,3 +21,5 @@ cat < /dev/ttyS0
 
 ## Serial port unblocking command for sending
 echo "test" > /dev/ttyS0
+
+## Pointer for irqbalance program: https://github.com/Irqbalance/irqbalance
