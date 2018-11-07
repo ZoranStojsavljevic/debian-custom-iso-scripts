@@ -16,7 +16,7 @@ did the following:
 While using customer Linux dlvt83 4.18.10 (Thu October 18, 2018.)
 x86_64 image, the following is true:
 The issue is easy to reproduce using the following commands:
-# stty -F /dev/ttyS1 (one message 50/50 - roughly every second time)
+stty -F /dev/ttyS1 (one message 50/50 - roughly every second time)
 Changing baud rate on fly with # stty -F /dev/ttyS1 1200 to stty -F
 /dev/ttyS1 576000 does not change anything in timing and occurrence
 frequency;
