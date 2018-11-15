@@ -186,7 +186,7 @@ int stress_fstat(
 
 				//------------------------------------------------
 
-				printf("\n\t\t\tRTC Driver Test Example.\n\n");
+				// printf("\n\t\t\tRTC Driver Test Example.\n\n");
 
 				/* Turn on update interrupts (one per second) */
 				retval = ioctl(fd, RTC_UIE_ON, 0);
@@ -199,27 +199,29 @@ int stress_fstat(
 					exit(errno);
 				}
 
-				printf("Counting 5 update (1/sec) interrupts from reading /dev/rtc0\n");
+#if 0
+				printf("Counting 1 update (1/sec) interrupts from reading /dev/rtc0\n");
 				// fflush(stderr);
-				for (i=1; i<6; i++) {
+				// for (i=1; i<6; i++) {
 					/* This read will block */
 					retval = read(fd, &data, sizeof(unsigned long));
 					if (retval == -1) {
 						perror("read");
 						exit(errno);
 					}
-					printf(" %d",i);
+					// printf(" %d",i);
 					// fflush(stderr);
 					irqcount++;
-				}
+				// }
+#endif
 
-				printf("Again, from using select(2) on /dev/rtc:\n");
+				// printf("Again, from using select(2) on /dev/rtc:\n");
 				// fflush(stderr);
 				// for (i=1; i<6; i++) {
-				i = 0;
-				while (1) {
-					i++;
-					struct timeval tv = {1, 0};     /* 5 second timeout on select */
+				// i = 0;
+				// while (1) {
+				//	i++;
+					struct timeval tv = {0, 1};     /* 1 usec timeout on select */
 					fd_set readfds;
 
 					FD_ZERO(&readfds);
@@ -236,10 +238,10 @@ int stress_fstat(
 						perror("read");
 						exit(errno);
 					}
-					printf("%d",i);
+					// printf("%d",i);
 					// fflush(stderr);
 					irqcount++;
-				}
+				// }
 
 				/* Turn off update interrupts */
 				retval = ioctl(fd, RTC_UIE_OFF, 0);
@@ -249,6 +251,7 @@ int stress_fstat(
 				}
 
 test_READ:
+#if 0
 				/* Read the RTC time/date */
 				retval = ioctl(fd, RTC_RD_TIME, &rtc_tm);
 				if (retval == -1) {
@@ -320,6 +323,7 @@ test_READ:
 
 				//------------------------------------------------
 
+#endif
 done:
 				printf("Closing file handle %d\n", fd); // Zoran
 				(void)close(fd);
