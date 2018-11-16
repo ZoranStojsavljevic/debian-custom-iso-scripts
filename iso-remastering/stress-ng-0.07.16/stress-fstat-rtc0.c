@@ -21,6 +21,8 @@
  * <apw@rossby.metr.ou.edu> but has more stress tests and more
  * functionality.
  *
+ * Test RTC functionality code at pointer:
+ * https://casper.berkeley.edu/svn/trunk/roach/sw/linux/Documentation/rtc.txt
  */
 
 #include <linux/rtc.h>
