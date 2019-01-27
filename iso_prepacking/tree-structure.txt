@@ -1,75 +1,75 @@
 TREE -L 3 structure
-.
-├── iso_remastering.sh
-├── README
-├── README.md
-├── tmp_dir
-│   ├── boot
-│   │   └── grub
-│   ├── d-i
-│   │   ├── gtk
-│   │   ├── initrd.gz
-│   │   ├── initrd.gz.genesis
-│   │   ├── preseed.cfg
-│   │   ├── test
-│   │   └── vmlinuz
-│   ├── dists
-│   │   └── stretch
-│   ├── isolinux
-│   │   ├── boot.cat
-│   │   ├── hdt.c32
-│   │   ├── isolinux.bin
-│   │   ├── isolinux.cfg
-│   │   ├── isolinux.cfg.genesis
-│   │   ├── ldlinux.c32
-│   │   ├── libcom32.c32
-│   │   ├── libgpl.c32
-│   │   ├── libmenu.c32
-│   │   ├── libutil.c32
-│   │   ├── memdisk
-│   │   ├── menu.cfg
-│   │   ├── menu.cfg.genesis
-│   │   ├── menu.cfg.timing_attempt
-│   │   ├── splash.png
-│   │   ├── stdmenu.cfg
-│   │   └── vesamenu.c32
-│   ├── live
-│   │   ├── config-4.9.0-6-amd64
-│   │   ├── filesystem.squashfs
-│   │   ├── initrd.img-4.9.0-6-amd64
-│   │   ├── initrd.img-4.9.0-6-amd64.genesis
-│   │   ├── System.map-4.9.0-6-amd64
-│   │   └── vmlinuz-4.9.0-6-amd64
-│   ├── pool
-│   │   └── main
-│   └── preseed.cfg
-└── work_dir
-    ├── README
-    └── squashfs-root
-        ├── bin
-        ├── boot
-        ├── dev
-        ├── etc
-        ├── home
-        ├── initrd.img -> boot/initrd.img-4.9.0-6-amd64
-        ├── initrd.img.old -> boot/initrd.img-4.9.0-6-amd64
-        ├── lib
-        ├── lib64
-        ├── media
-        ├── mnt
-        ├── opt
-        ├── preseed.cfg
-        ├── preseed.cfg.genesis
-        ├── proc
-        ├── root
-        ├── run
-        ├── sbin
-        ├── srv
-        ├── sys
-        ├── tmp
-        ├── usr
-        ├── var
-        ├── vmlinuz -> boot/vmlinuz-4.9.0-6-amd64
-        └── vmlinuz.old -> boot/vmlinuz-4.9.0-6-amd64
 
-33 directories, 38 files
+[root@fedora29-ssd test]# tree -L 3 extracted/
+extracted/
+├── boot
+│   └── grub
+│       ├── efi.img
+│       ├── font.pf2
+│       ├── grub.cfg
+│       ├── grub.cfg.genesis
+│       ├── loopback.cfg
+│       └── x86_64-efi
+├── d-i
+│   ├── gtk
+│   │   ├── initrd.gz
+│   │   └── vmlinuz
+│   ├── initrd.gz
+│   ├── initrd.gz.genesis
+│   ├── preseed.cfg
+│   ├── ramfs.sh
+│   ├── test
+│   │   ├── bin
+│   │   ├── dev
+│   │   ├── etc
+│   │   ├── init
+│   │   ├── initrd
+│   │   ├── lib
+│   │   ├── lib64
+│   │   ├── media
+│   │   ├── mnt
+│   │   ├── preseed.cfg
+│   │   ├── preseed.cfg.01
+│   │   ├── preseed.cfg.02
+│   │   ├── preseed.cfg.legacy
+│   │   ├── preseed.cfg.uefi_old
+│   │   ├── proc
+│   │   ├── run
+│   │   ├── sbin
+│   │   ├── sys
+│   │   ├── tmp
+│   │   ├── usr
+│   │   └── var
+│   └── vmlinuz
+├── dists
+│   └── stretch
+│       ├── main
+│       └── Release
+├── isolinux
+│   ├── boot.cat
+│   ├── hdt.c32
+│   ├── isolinux.bin
+│   ├── isolinux.cfg
+│   ├── isolinux.cfg.genesis
+│   ├── ldlinux.c32
+│   ├── libcom32.c32
+│   ├── libgpl.c32
+│   ├── libmenu.c32
+│   ├── libutil.c32
+│   ├── memdisk
+│   ├── menu.cfg
+│   ├── menu.cfg.genesis
+│   ├── menu.cfg.timing_attempt
+│   ├── splash.png
+│   ├── stdmenu.cfg
+│   └── vesamenu.c32
+├── live
+│   ├── config-4.9.0-6-amd64
+│   ├── filesystem.squashfs
+│   ├── initrd.img-4.9.0-6-amd64
+│   ├── System.map-4.9.0-6-amd64
+│   └── vmlinuz-4.9.0-6-amd64
+└── pool
+    └── main
+
+67 directories, 41 files
