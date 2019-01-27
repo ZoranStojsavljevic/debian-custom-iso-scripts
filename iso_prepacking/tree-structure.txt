@@ -1,5 +1,4 @@
-### TREE -L 3 structure
-```
+TREE -L 3 structure
 .
 ├── iso_remastering.sh
 ├── README
@@ -74,4 +73,3 @@
         └── vmlinuz.old -> boot/vmlinuz-4.9.0-6-amd64
 
 33 directories, 38 files
-```
