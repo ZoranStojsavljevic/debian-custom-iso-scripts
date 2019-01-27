@@ -1,0 +1,83 @@
+### ISO commands
+```
+## mount -o rw, loop -t iso9660 <image>.iso /tmp/iso
+## mount -o rw, loop -t iso9660 <image>.iso /mnt/iso
+mount -o loop -t iso9660 debian-live-9.4.0-amd64-gnome.iso /tmp/iso
+mount -o rw, loop -t iso9660 debian-live-9.4.0-amd64-gnome.iso /tmp/iso
+bsdtar -C <DESTINATION> -xf <ISO> --strip-components 4 --exclude '*.udeb' /pool/main
+
+##[1] EXTRACT .iso: xorisso package 
+## https://blog.sleeplessbeastie.eu/2014/08/26/how-to-extract-an-iso-image/
+[generic] xorriso -osirrox on -indev image.iso -extract / extracted_iso_image
+xorriso -osirrox on -indev debian-live-9.4.0-amd64-gnome.iso -extract / extracted
+
+##[2] EXTRACT .iso: 7z package
+## From the directory tmp/ (where is debian-live-9.4.0-amd64-gnome.iso.genesis):
+7z x -oextracted-modified/ debian-live-9.4.0-amd64-gnome.iso.genesis
+
+##[1] COMPILE/CREATE .iso: genisoimage
+[generic] genisoimage -o output_image.iso directory_name
+genisoimage -o debian-live-9.4.0-amd64-gnome.iso extracted-modified
+genisoimage -input-charset UTF-8 -o debian-live-9.4.0-amd64-gnome.iso extracted-modified
+genisoimage -o debian-live-9.4.0-amd64-gnome.iso extracted-modified/
+
+##[2] COMPILE/CREATE .iso: mkisofs
+## Basic command:
+## mkisofs -o output_image.iso directory_name
+mkisofs -lJR -o output_image.iso directory_name
+
+mkisofs -lJR -o debian-live-9.4.0-amd64-gnome.iso extracted
+-l : Allow full 31 character filenames.
+-J : Generate Joliet directory records in addition to regular iso9660 file names.
+-R : Generate System Use Sharing Protocol (SUSP) and Rock Ridge (RR) records using the Rock Ridge protocol.
+
+mkisofs -V volume_label -r folder_location | gzip > output-image-comressed.iso.gz
+
+## COMPILE/CREATE .iso: mkisofs
+## From the directory: /data/vms/vbox/iso_files/tmp/extracted-modified
+[vuser@localhost extracted-modified]$ mkisofs -o ../debian-live-9.4.0-amd64-gnome.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -J -r /data/vms/vbox/iso_files/tmp/extracted-modified
+_______
+_______
+
+Two commands used, at the end:
+
+## EXTRACT .iso: 7z package
+## From the directory: /data/vms/vbox/iso_files/tmp/extracted-modified (where is debian-live-9.4.0-amd64-gnome.iso.genesis):
+[vuser@localhost tmp]$ 7z x -oextracted-modified/ debian-live-9.4.0-amd64-gnome.iso.genesis
+
+## COMPILE/CREATE .iso: mkisofs
+## From the directory: /data/vms/vbox/iso_files/tmp/extracted-modified
+[vuser@localhost extracted-modified]$ mkisofs -o ../debian-live-9.4.0-amd64-gnome.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -J -r /data/vms/vbox/iso_files/tmp/extracted-modified
+
+[vuser@localhost extracted-modified] mkisofs -U -r -v -T -J -joliet-long -V "debian-live-9.4.0-amd64-gnome.iso" -volset "debian-live-9.4.0-amd64-gnome.iso" -A "debian-live-9.4.0-amd64-gnome.iso" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -e images/efiboot.img -no-emul-boot -o ../debian-live-9.4.0-amd64-gnome.iso
+
+mkisofs -U -v -T -J -joliet-long -V "debian.iso" -volset "debian.iso" -A "debian.iso" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table [-eltorito-alt-boot -e images/efiboot.img] -no-emul-boot -o ../debian.iso -r /data/vms/vbox/iso_files/tmp/rwiso
+
+xorriso -as genisoimage -l -r -J -V "debian.iso" -b isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 -boot-info-table -c isolinux/boot.cat -o ../debian.iso ./
+
+sudo xorriso -as mkisofs -R -r -J -joliet-long -partition_offset 16 -A "Debian Gnome Live (DT)" -publisher "_nobody_" -V "Debian 9.4.0 Stretch" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o debian-remastered.iso tmp_dir
+
+## Latest MBR (Legacy) and one MBR (Legacy) used:
+sudo xorriso -as mkisofs -R -r -J -joliet-long -partition_offset 16 -A "Debian Gnome Live (DT)" -publisher "_nobody_" -V "Debian 9.4.0 Stretch" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o debian-live-9.4.0-amd64-gnome.iso tmp_dir
+
+## Latest UEFI and one UEFI used:
+xorriso -as mkisofs -U -r -v -T -J -joliet-long -V "Debian 9.4.0 Stretch" -volset "Debian 9.4.0 Stretch" -A "Debian 9.4.0 Stretch" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -graft-points -isohybrid-mbr /usr/share/syslinux/isohdpfx.bin -o debian-live-9.4.0-amd64-gnome.iso tmp_dir
+
+## support switches: mkisofs -lJR -o debian-live-9.4.0-amd64-gnome.iso extracted
+## -l : Allow full 31 character filenames.
+## -J : Generate Joliet directory records in addition to regular iso9660 file names.
+## -R : Generate System Use Sharing Protocol (SUSP) and Rock Ridge (RR) records using the Rock Ridge protocol.
+## 7z a -oextracted-modified/ debian-live-9.4.0-amd64-gnome.iso
+_______
+
+EXTRACT initrd.img to the test/ dir:
+[vuser@localhost test]$ pwd
+/data/vms/vbox/iso_files/tmp/extracted/live/test
+[vuser@localhost test]$ zcat /data/vms/vbox/iso_files/tmp/extracted/live/initrd.img-4.9.0-6-amd64 | cpio -idmv
+
+PACK back initrd.img from the test/ dir:
+[vuser@localhost test]$ pwd
+/data/vms/vbox/iso_files/tmp/extracted/live/test
+[vuser@localhost test]$ find . | cpio -o -c | gzip -9 > /data/vms/vbox/iso_files/tmp/extracted/live/initrd.img-4.9.0-6-amd64
+[vuser@fedora29-ssd squash]$ 
+```
