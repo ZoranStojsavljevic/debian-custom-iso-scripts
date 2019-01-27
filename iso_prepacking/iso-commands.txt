@@ -1,5 +1,5 @@
-### ISO commands
-```
+ISO commands
+
 ## mount -o rw, loop -t iso9660 <image>.iso /tmp/iso
 ## mount -o rw, loop -t iso9660 <image>.iso /mnt/iso
 mount -o loop -t iso9660 debian-live-9.4.0-amd64-gnome.iso /tmp/iso
@@ -80,4 +80,3 @@ PACK back initrd.img from the test/ dir:
 /data/vms/vbox/iso_files/tmp/extracted/live/test
 [vuser@localhost test]$ find . | cpio -o -c | gzip -9 > /data/vms/vbox/iso_files/tmp/extracted/live/initrd.img-4.9.0-6-amd64
 [vuser@fedora29-ssd squash]$ 
-```
