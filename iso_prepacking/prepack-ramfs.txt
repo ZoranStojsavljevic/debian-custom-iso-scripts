@@ -1,0 +1,36 @@
+### GENESIS
+
+### Phase 3: How to make preseed Debian Live distro for VBox VM automatic creation!
+
+[1] Please, go to https://cdimage.debian.org/cdimage/weekly-live-builds/amd64/iso-hybrid/ and download the latest debian-live-testing-amd64-gnome.iso image
+
+[2] Download it here: /data/vms/vbox/iso_files
+
+[3] Create the directory /data/vms/vbox/iso_files/try-buster
+
+[4] Execute in the directory /data/vms/vbox/iso_files/try-buster the following command: 7z x -otry-buster/ debian-live-testing-amd64-gnome.iso
+
+[5] cd to try-buster/d-i/ and there execute: cp initrd.gz initrd.gz.genesis
+
+## How to unpack and repack an initial ramdisk (initrd/initramfs) image?
+## https://access.redhat.com/solutions/24029
+[6] create new directory: mkdir test/ and cp initrd.gz test/, then cd test/
+
+[7] Unpack initrd.gz using the following command: zcat initrd.gz | cpio -idmv
+
+[8] rm initrd.gz, then cp ../../preseed.cfg ., cp ../../ramfs.sh ..
+
+[9] Execute ramfs.sh
+[vuser@fedora29-ssd d-i]$ cat ramfs.sh 
+#!/bin/bash
+pwd
+ls -al initrd.gz
+rm initrd.gz
+cd test/
+find . | cpio -o -c | gzip -9 > ../initrd.gz
+cd ..
+ls -al initrd.gz
+pwd
+rm debian-live-testing-amd64-gnome.iso
+xorriso -as mkisofs -U -r -v -T -J -joliet-long -V "Debian 10.0.0 Buster" -volset "Debian 10.0.0 Buster" -A "Debian 10.0.0 Buster" -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -graft-points -isohybrid-mbr /usr/share/syslinux/isohdpfx.bin -o debian-live-testing-amd64-gnome.iso .
+mv debian-live-9.4.0-amd64-gnome.iso ..
