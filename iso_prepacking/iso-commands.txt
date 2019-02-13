@@ -1,3 +1,6 @@
+### NET pointers of value!
+https://blog.sleeplessbeastie.eu/2014/08/26/how-to-extract-an-iso-image/
+
 ISO commands
 
 ## mount -o rw, loop -t iso9660 <image>.iso /tmp/iso
