@@ -23,3 +23,23 @@ cat < /dev/ttyS0
 echo "test" > /dev/ttyS0
 
 ## Pointer for irqbalance program: https://github.com/Irqbalance/irqbalance
+_______
+
+root@arm:/home/debian# stty -F /dev/ttyUSB0 19200
+stty: /dev/ttyUSB0: No such file or directory
+root@arm:/home/debian# setserial -a /dev/ttySC0
+/dev/ttySC0, Line 0, UART: undefined, Port: 0x0000, IRQ: 76
+	Baud_base: 1500000, close_delay: 50, divisor: 0
+	closing_wait: 3000
+	Flags: spd_normal low_latency
+
+root@arm:/home/debian# stty -F /dev/ttySC0 115200
+root@arm:/home/debian# setserial -a /dev/ttySC0
+/dev/ttySC0, Line 0, UART: undefined, Port: 0x0000, IRQ: 76
+	Baud_base: 1500000, close_delay: 50, divisor: 0
+	closing_wait: 3000
+	Flags: spd_normal low_latency
+
+root@arm:/home/debian# setserial -G /dev/ttySC0
+/dev/ttySC0 uart undefined port 0x0000 irq 76 baud_base 1500000 spd_normal low_latency
+root@arm:/home/debian# setserial -a /ev/ttySC0
